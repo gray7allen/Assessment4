@@ -7,12 +7,12 @@ app.use(cors());
 
 app.use(express.json());
 
-const { getCompliment, getFortune, getGif, getFour, getFive } = require('./controller')
+const {getFortune, getAllPosters, createMotivationalPoster, deletePoster} = require('./controller')
 
-app.get("/api/compliment", getCompliment);
 app.get("/api/fortune", getFortune);
-app.get("/api/gif", getGif)
-app.get("/api/four", getFour)
-app.get("/api/five", getFive)
+
+app.get("/api/motivationalPosters", getAllPosters)
+app.post("/api/motivationalPosters", createMotivationalPoster)
+app.delete("/api/motivationalPosters/:id", deletePoster)
 
 app.listen(4000, () => console.log("Server running on 4000"));

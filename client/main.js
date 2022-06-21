@@ -1,14 +1,10 @@
-const complimentBtn = document.getElementById("complimentButton")
+const container = document.querySelector('#posters-container')
+const form = document.querySelector('form')
 
-const getCompliment = () => {
-    axios.get("http://localhost:4000/api/compliment/")
-        .then(res => {
-            const data = res.data;
-            alert(data);
-    });
-};
+const baseURL = `http://localhost:4000/api/poster`
 
-complimentBtn.addEventListener('click', getCompliment);
+const posterCallback = ({ data: motivationalPosters }) => displayPosters(motivationalPosters)
+const errCallback = err => console.log(err)
 
 const fortuneButton = document.getElementById("randomFortuneButton")
 
@@ -22,38 +18,46 @@ const getFortune = () => {
 
 fortuneButton.addEventListener('click', getFortune)
 
-const gifButton = document.getElementById("randomGifButton")
+const getAllPosters = () => axios.get(baseURL).then(posterCallback).catch(errCallback)
+const createMotivationalPoster = body => axios.post(baseURL, body).then(posterCallback).catch(errCallback)
+const deletePoster = id => axios.delete(`${baseURL}/${id}`).then(posterCallback).catch(errCallback)
 
-const getGif = () => {
-    axios.get("http://localhost:4000/api/gif")
-        .then(res => {
-            const data = res.data;
-            alert(data);
-    });
-};
+function submitHandler(m) {
+    m.preventDefault()
 
-gifButton.addEventListener('click', getGif)
+    let title = document.querySelector('#title')
+    let imageURL = document.querySelector('#img')
 
-const fourButton = document.getElementById("randomFourButton")
+    let bodyObj = {
+        title: title.value,
+        imageURL: imageURL.value
+    }
 
-const getFour = () => {
-    axios.get("http://localhost:4000/api/four")
-        .then(res => {
-            const data = res.data;
-            alert(data);
-    });
-};
+    createMotivationalPoster(bodyObj)
 
-fourButton.addEventListener('click', getFour)
+    title.value = ''
+    imageURL.value = ''
 
-const fiveButton = document.getElementById("randomFiveButton")
+}
 
-const getFive = () => {
-    axios.get("http://localhost:4000/api/five")
-        .then(res => {
-            const data = res.data;
-            alert(data);
-    });
-};
+function createPoster(poster) {
+    const motPoster = document.createElement('div')
+    motPoster.classList.add('mot-poster')
 
-fiveButton.addEventListener('click', getFive)
+    motPoster.innerHTML = `<img alt='motivational poster' src=${poster.imageURL} class="motivational-poster"/>
+    <p class="title">${poster.title}</p>
+    <button onclick="deletePoster(${poster.id})">delete</button>
+    `
+    container.appendChild(motPoster)
+}
+
+function displayPosters(arr) {
+    container.innerHTML = ``
+    for (let i = 0; i < arr.length; i++) {
+        createPoster(arr[i])
+    }
+}
+
+form.addEventListener('submit', submitHandler)
+
+getAllPosters()
