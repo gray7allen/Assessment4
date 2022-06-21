@@ -2,16 +2,19 @@
     {
       "id": 1,
       "title": "Difficult Roads",
+      "rating": 3,
       "imageURL" : "https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW90aXZhdGlvbmFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
     },
     {
       "id": 2,
       "title": "Didn't Come This Far",
+      "rating": 4,
       "imageURL" : "https://images.unsplash.com/photo-1552508744-1696d4464960?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW90aXZhdGlvbmFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
     },
     {
       "id": 3,
       "title": "Remember Why",
+      "rating": 5,
       "imageURL" : "https://images.unsplash.com/photo-1564410267841-915d8e4d71ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fG1vdGl2YXRpb25hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
     }
   ]

@@ -1,18 +1,20 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
+app.use(express.json());
 app.use(cors());
 
-app.use(express.json());
+const {getPosters, deletePoster, createPoster, updatePoster, getFortune} = require('./controller')
 
-const {getFortune, getAllPosters, createMotivationalPoster, deletePoster} = require('./controller')
 
-app.get("/api/fortune", getFortune);
+app.get('/api/posters', getPosters)
+app.delete('/api/posters/:id', deletePoster)
+app.post('/api/posters', createPoster)
+app.put('/api/posters/:id', updatePoster)
 
-app.get("/api/motivationalPosters", getAllPosters)
-app.post("/api/motivationalPosters", createMotivationalPoster)
-app.delete("/api/motivationalPosters/:id", deletePoster)
+app.get('/api/fortune', getFortune)
 
-app.listen(4000, () => console.log("Server running on 4000"));
+
+app.listen(4000, console.log('Listening on port 4000'))
